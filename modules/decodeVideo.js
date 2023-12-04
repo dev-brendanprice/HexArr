@@ -51,6 +51,8 @@ export const decodeVideo = async function () {
 
 
     new ffmpeg('./video.mp4', function (err, video) {
+
+        // Rubbish error handling lol
 		if (!err) {
 
             let metadata = video.metadata;
@@ -64,36 +66,22 @@ export const decodeVideo = async function () {
             },
             async function (error, files) {
 
-                let calls = [];
+                let filesArray = new Array(files.length); // static length
 
+                // Loop over files in response
                 for (let i=0; i<files.length; i++) {
 
-                    calls.push(
-                        new Promise((resolve, reject) => {
-
-                            let frameName = files[i];
-                            let frameCount = i;
-                            let { data } = decode(fs.readFileSync(`${frameName}`)); // Convert image to rgb
-                            let hexArray = [];
-
-                            // Convert colorMap into hex codes
-                            for (let i=0; i<data.length; i+=4) {
-
-                                // Append hex
-                                hexArray.push(`#${data[i].toString(16)}${data[i+1].toString(16)}${data[i+2].toString(16)}`); // Ignoring alpha channels
-                            };
-
-                            fs.writeFileSync(`./txt/frame_${frameCount}.txt`, hexArray.toString()); // Write to file
-                            // console.log(`${frameName} => ./txt/frame_${frameCount}.txt`);
-
-                        })
-                    );
+                    // Get frame count and name
+                    let frameName = files[i];
+                    
+                    // Push promise to arr
+                    filesArray.push(frameName);
                 };
-                log('d')
-                await Promise.all(calls); // Execute all
 
+                // Execute all promises
+                await Promise.all(filesArray.map((file) => decodeFrame(file)));
             });
-            log('done')
+
 		}
         else {
 			console.error(err);
