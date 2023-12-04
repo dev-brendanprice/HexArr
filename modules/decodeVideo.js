@@ -6,50 +6,6 @@ const log = console.log.bind(console);
 
 export const decodeVideo = async function () {
 
-    // let frames = 0;
-    // let width = 0;
-    // let height = 0;
-
-    // // New ffmpeg class
-    // let process = new ffmpeg('./video.mp4');
-    // await process.then(async function (video) {
-
-    //     // Store metadata
-    //     let metadata = video.metadata;
-    //     frames = metadata.duration.seconds * metadata.video.fps;
-    //     width = metadata.video.resolution.w;
-    //     height = metadata.video.resolution.h;
-
-    //     let promise = new Promise((resolve, reject) => {
-            
-    //         // Extract frames from video
-    //         video.fnExtractFrameToJPG('./frames', {
-    //             frame_rate: metadata.video.fps,
-    //             number: frames,
-    //             file_name: 'frame_%s'
-    //         },
-    //         function (error, files) {
-
-    //             log('j')
-    //             let fc = 1;
-
-    //             // Loop over frame files and decode
-    //             for (let file of files) {
-    //                 decodeFrame(fc, file); // Decode and convert frame to hex then save it in /txt
-    //                 fc++;
-    //             };
-    //             resolve();
-
-    //         });
-    //     });
-
-    //     log('done.'); // ..
-    // },
-    // function (err) {
-    //     console.error(err);
-    // });
-
-
     new ffmpeg('./video.mp4', function (err, video) {
 
         // Rubbish error handling lol
