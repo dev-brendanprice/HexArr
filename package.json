@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "type": "module",
+  "type": "commonjs",
   "license": "ISC",
   "dependencies": {
     "ffmpeg": "^0.0.4",

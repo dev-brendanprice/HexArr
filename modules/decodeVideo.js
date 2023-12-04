@@ -1,8 +1,10 @@
-import {decodeFrame} from './decodeFrame.js';
-import ffmpeg from 'ffmpeg';
+// import {decodeFrame} from './decodeFrame.js';
+// import ffmpeg from 'ffmpeg';
+const {decodeFrame} = require('./decodeFrame.js');
+const ffmpeg = require('ffmpeg');
 const log = console.log.bind(console);
 
-export const decodeVideo = async function () {
+const decodeVideo = async function () {
 
     new ffmpeg('./video.mp4', function (err, video) {
 
@@ -42,3 +44,5 @@ export const decodeVideo = async function () {
 		};
 	});
 };
+
+exports.decodeVideo = decodeVideo;

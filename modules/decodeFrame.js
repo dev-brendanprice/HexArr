@@ -1,8 +1,10 @@
-import sharp from 'sharp';
-import fs from 'fs';
+// import sharp from 'sharp';
+// import fs from 'fs';
+const sharp = require('sharp');
+const fs = require('fs');
 const log = console.log.bind(console);
 
-export const decodeFrame = async (frameName) =>  {
+const decodeFrame = async (frameName) =>  {
 
     // Promisify this
     new Promise (
@@ -32,3 +34,5 @@ export const decodeFrame = async (frameName) =>  {
         }
     );
 };
+
+exports.decodeFrame = decodeFrame;
