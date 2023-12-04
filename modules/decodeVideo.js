@@ -1,6 +1,4 @@
 import {decodeFrame} from './decodeFrame.js';
-import decode from 'image-decode';
-import fs from 'fs';
 import ffmpeg from 'ffmpeg';
 const log = console.log.bind(console);
 
@@ -43,7 +41,4 @@ export const decodeVideo = async function () {
 			console.error(err);
 		};
 	});
-
-
-
 };

@@ -1,6 +1,5 @@
 import sharp from 'sharp';
 import fs from 'fs';
-
 const log = console.log.bind(console);
 
 export const decodeFrame = async (frameName) =>  {
