@@ -25,9 +25,9 @@ export const decodeFrame = async (frameName) =>  {
                 for (let i=0; i<data.length; i+=3) {
 
                     // Get r,g,b codes
-                    let r = data[i]; // Ignore color rounding for now
-                    let g = data[i+1];
-                    let b = data[i+2];
+                    let r = roundColor(data[i]); // Ignore color rounding for now
+                    let g = roundColor(data[i+1]);
+                    let b = roundColor(data[i+2]);
 
                     // Convert channels to hex
                     let hexR = r.toString(16);
