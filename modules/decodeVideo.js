@@ -1,44 +1,41 @@
 import {decodeFrame} from './decodeFrame.js';
 import ffmpeg from 'ffmpeg';
-const log = console.log.bind(console);
 
 export const decodeVideo = async function () {
 
-    new ffmpeg('./video.mp4', function (err, video) {
+    new ffmpeg('./video.mp4', function (error, video) {
 
-        // Rubbish error handling lol
-		if (!err) {
+        if (error) throw error; // (loosely) Handle any errors
 
-            let metadata = video.metadata;
-            let frames = metadata.duration.seconds * metadata.video.fps;
-			
-            // Extract frames from video
-            video.fnExtractFrameToJPG('./frames', {
-                frame_rate: metadata.video.fps,
-                number: frames,
-                file_name: 'frame_%s'
-            },
-            async function (error, files) {
+        // Vars
+        let metadata = video.metadata;
+        let frames = metadata.duration.seconds * metadata.video.fps;
+        
+        // Extract frames from video
+        video.fnExtractFrameToJPG('./frames', {
+            frame_rate: metadata.video.fps,
+            number: frames,
+            file_name: 'frame_%s'
+        },
+        async function (err, files) {
 
-                let filesArray = new Array(files.length); // static length
+            if (err) throw err; // (loosely) Handle any errors
 
-                // Loop over files in response
-                for (let i=0; i<files.length; i++) {
+            // Declare array with set length to map over
+            let filesArray = new Array(files.length);
 
-                    // Get frame count and name
-                    let frameName = files[i];
-                    
-                    // Push promise to arr
-                    filesArray.push(frameName);
-                };
+            // Loop over files in response
+            for (let i=0; i<files.length; i++) {
 
-                // Execute all promises
-                await Promise.all(filesArray.map((file) => decodeFrame(file)));
-            });
+                // Get frame count and name
+                let frameName = files[i];
+                
+                // Push promise to arr
+                filesArray.push(frameName);
+            };
 
-		}
-        else {
-			console.error(err);
-		};
+            // Execute all promises
+            await Promise.all(filesArray.map((file) => decodeFrame(file)));
+        });
 	});
 };

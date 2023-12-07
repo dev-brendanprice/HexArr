@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "compress": "node index.js",
-    "display": "node disp/display.js"
+    "display": "node disp/display.js",
+    "record": "node disp/screengrab.js"
   },
   "keywords": [],
   "author": "",
   "type": "module",
   "license": "ISC",
   "dependencies": {
+    "akey-screenshot-desktop": "^2.0.2",
+    "desktop-screenshot": "^0.1.1",
     "ffmpeg": "^0.0.4",
     "fs": "^0.0.1-security",
     "image-encode": "^1.3.1",
