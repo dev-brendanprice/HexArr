@@ -1,9 +1,10 @@
 import {decodeFrame} from './decodeFrame.js';
+import {conf} from '../config.js';
 import ffmpeg from 'ffmpeg';
 
 export const decodeVideo = async function () {
 
-    new ffmpeg('./video.mp4', function (error, video) {
+    new ffmpeg(conf.inputFilePath, function (error, video) {
 
         if (error) throw error; // (loosely) Handle any errors
 

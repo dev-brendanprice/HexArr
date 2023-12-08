@@ -11,7 +11,6 @@ setInterval(() => {
 
     screenshot({format: 'jpg'})
     .then((img) => {
-        log('grabbed');
         fs.writeFileSync('./disp/frame_480x270_0.jpg', img);
     })
     .catch((err) => {

@@ -7,9 +7,11 @@ const log = console.log.bind(console);
 const display = (folderPath) => {
     
     // Read compressed file
-    const pepsi = fs.readFileSync(folderPath).toString(); // Always use .toString()
-    const data = lengthDecode(pepsi);
+    let data = fs.readFileSync(folderPath).toString(); // Always use .toString()
     let rgbCodes = [];
+
+    // RL decode file
+    data = lengthDecode(data);
 
     // Convert hex codes back into rgb
     for (const code of data) {
@@ -23,7 +25,7 @@ const display = (folderPath) => {
     };
 
     // Make new image for dev output
-    fs.writeFileSync('out.jpg', Buffer.from(encode(rgbCodes, [1920, 1080], 'jpg')));
+    fs.writeFileSync('out.jpg', Buffer.from(encode(rgbCodes, [848, 478], 'jpg')));
 
     // Check isFindAverageFileSize boolean
     if (conf.isFindAverageFileSize && !conf.isScreenContent) {

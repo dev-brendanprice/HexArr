@@ -12,7 +12,7 @@ if (conf.isScreenContent) {
     setInterval(() => {
 
         // Converts recorded screen content to compressed txt files
-        decodeFrame('./disp/frame_480x270_0.jpg', true);
+        decodeFrame('./disp/frame_480x270_0.jpg');
     }, conf.intervalMS);
     
 }
